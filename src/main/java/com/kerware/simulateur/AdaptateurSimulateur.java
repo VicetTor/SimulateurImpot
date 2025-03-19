@@ -11,7 +11,7 @@ public class AdaptateurSimulateur implements ICalculateurImpot {
     private int nbEnfantsSituationHandicap;
     private boolean parentIsole;
 
-    /*Bonjour !!!!!!!!*/
+    /*Bonjour !!!!!!!! ahah*/
 
     @Override
     public void setRevenusNetDeclarant1(int rn) {
