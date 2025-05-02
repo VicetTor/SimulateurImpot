@@ -258,7 +258,8 @@ public class TestsSimulateur {
 
     public static Stream<Arguments> donneesRobustesse() {
         return Stream.of(
-                Arguments.of(-1, 0,"CELIBATAIRE", 0, 0, false), // 0%
+                Arguments.of(10000, -1, "MARIE", 0, 0, false), // 0%
+                Arguments.of(-1, 0,"CELIBATAIRE", 0, 0, false),
                 Arguments.of(20000,0, null , 0, 0, false), // 11%
                 Arguments.of(35000,0, "CELIBATAIRE", -1, 0, false ), // 30%
                 Arguments.of(95000,0, "CELIBATAIRE", 0, -1, false), // 41%
