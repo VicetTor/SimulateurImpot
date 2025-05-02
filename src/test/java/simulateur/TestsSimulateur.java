@@ -165,8 +165,10 @@ public class TestsSimulateur {
     public static Stream<Arguments> donneesGainImpot() {
         return Stream.of(
                 Arguments.of(95000, 0, "MARIE", 3, 7036),
+                Arguments.of(91154, 0, "MARIE", 3, 7036),
+                Arguments.of(91153, 0, "MARIE", 3, 7035),
+                Arguments.of(50000, 0, "MARIE", 3, 2058),
                 Arguments.of(95000, 0, "MARIE", 0, 0),
-                Arguments.of(50000, 0, "MARIE", 3, 7036),
                 Arguments.of(50000, 0, "MARIE", 0, 0)
         );
     }
@@ -175,7 +177,7 @@ public class TestsSimulateur {
     @ParameterizedTest
     @MethodSource("donneesGainImpot")
     public void testPlafondGainImpot(int revenuNetDeclarant1, int revenuNetDeclarant2, String situationFamiliale,
-                                     int nbEnfantsACharge, int gainMaxAttendu) {
+                                     int nbEnfantsACharge, int gainAttendu) {
 
         // Arrange
         simulateur.setRevenusNetDeclarant1(revenuNetDeclarant1);
@@ -196,7 +198,7 @@ public class TestsSimulateur {
         int gainReel = impotSansPartsEnfants - impotAvecEnfants;
 
         // Assert
-        assertEquals(gainMaxAttendu, Math.max(gainReel, gainMaxAttendu));
+        assertEquals(gainAttendu, gainReel);
     }
 
     /// COUVERTURE EXIGENCE : EXG_IMPOT_06 ////////////////////////////////////////////////////////////////////////////*
@@ -291,7 +293,8 @@ public class TestsSimulateur {
 
     public static Stream<Arguments> donneesRobustesse() {
         return Stream.of(
-                Arguments.of(-1, 0,"CELIBATAIRE", 0, 0, false), // 0%
+                Arguments.of(10000, -1, "MARIE", 0, 0, false), // 0%
+                Arguments.of(-1, 0,"CELIBATAIRE", 0, 0, false),
                 Arguments.of(20000,0, null , 0, 0, false), // 11%
                 Arguments.of(35000,0, "CELIBATAIRE", -1, 0, false ), // 30%
                 Arguments.of(95000,0, "CELIBATAIRE", 0, -1, false), // 41%
