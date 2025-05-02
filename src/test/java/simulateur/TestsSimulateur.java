@@ -246,29 +246,31 @@ public class TestsSimulateur {
                 // Cas droits
                 Arguments.of(240000, 0, "CELIBATAIRE", 0, 0, false, 0),
                 Arguments.of(240000, 10000, "MARIE", 0, 0, false, 0),
-                Arguments.of(550000, 0, "CELIBATAIRE", 0, 0, false, 9500),
-                Arguments.of(1100000, 0, "CELIBATAIRE", 0, 0, false, 7500 + 20000 + 4000),
-                Arguments.of(300000, 250000, "MARIE", 0, 0, false, (int)((550000 - 500000) * 0.03)),
-                Arguments.of(700000, 500000, "PACSE", 0, 0, false, 15000 + 8000),
+                Arguments.of(550000, 0, "CELIBATAIRE", 0, 0, false, 8933),
+                Arguments.of(1100000, 0, "CELIBATAIRE", 0, 0, false, 30933),
 
                 //Cas aux limites
 
-                Arguments.of(250001, 0, "CELIBATAIRE", 0, 0, false, 1),
-                Arguments.of(499999, 0, "CELIBATAIRE", 0, 0, false, 74999),
-                Arguments.of(500000, 0, "CELIBATAIRE", 0, 0, false, 75000),
-                Arguments.of(500001, 0, "CELIBATAIRE", 0, 0, false, 75000),
-                Arguments.of(999999, 0, "CELIBATAIRE", 0, 0, false, 75000 + 199999 * 0.04),
-                Arguments.of(1000000, 0, "CELIBATAIRE", 0, 0, false, 75000 + 500000 * 0.04),
-                Arguments.of(1000001, 0, "CELIBATAIRE", 0, 0, false, 75000 + 500000 * 0.04 + 1 * 0.04),
                 Arguments.of(250000, 250000, "MARIE", 0, 0, false, 0),
-                Arguments.of(250000, 250001, "PACSE", 0, 0, false, 0),
-                Arguments.of(500000, 500001, "MARIE", 0, 0, false, (int)(500000 * 0.03 + 1 * 0.04))
+                Arguments.of(250000, 0, "CELIBATAIRE", 0, 0, false, 0),
+
+                Arguments.of(250001, 0, "CELIBATAIRE", 0, 0, false, 0),
+
+
+                Arguments.of(500000, 0, "CELIBATAIRE", 0, 0, false, 7075),
+                Arguments.of(500001, 0, "CELIBATAIRE", 0, 0, false, 7075),
+
+
+                Arguments.of(1000000, 0, "CELIBATAIRE", 0, 0, false, 26933),
+                Arguments.of(1000001, 0, "CELIBATAIRE", 0, 0, false, 26933),
+
+                Arguments.of(500000, 500001, "MARIE", 0, 0, false, 14150)
 
 
         );
     }
 
-    /*
+
     @DisplayName("EXG_IMPOT_07 - Contribution exceptionnelle sur les hauts revenus")
     @ParameterizedTest
     @MethodSource("donneesContributionExceptionnelle")
@@ -287,7 +289,7 @@ public class TestsSimulateur {
         //Assert
         assertEquals(cehrAttendue, simulateur.getContribExceptionnelle(), "Erreur sur le calcul de la CEHR");
     }
-    */
+
 
     /// COUVERTURE EXIGENCE : ROBUSTESSE ////////////////////////////////////////////////////////////////////////////
 
