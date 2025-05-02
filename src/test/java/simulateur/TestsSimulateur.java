@@ -3,6 +3,7 @@ package simulateur;
 import com.kerware.simulateur.AdaptateurSimulateur;
 import com.kerware.simulateur.ICalculateurImpot;
 import com.kerware.simulateur.SituationFamiliale;
+import org.apache.commons.validator.Arg;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -202,29 +203,13 @@ public class TestsSimulateur {
 
     public static Stream<Arguments> donneesDecote() {
         return Stream.of(
-                // Personne seule — sans décote
-                Arguments.of(40000, "CELIBATAIRE", 0, 0, false, 2500, 2500),
+                
+                Arguments.of(40000, "CELIBATAIRE", 0, 0, false, 4086, 4086),
+                Arguments.of(32010, "CELIBATAIRE", 0, 0, false, 1929, 1929),
+                Arguments.of(32008, "CELIBATAIRE", 0, 0, false, 1928, 1927),
 
-                // Personne seule — au seuil pile : 1929€ (pas de décote)
-                Arguments.of(30000, "CELIBATAIRE", 0, 0, false, 1929, 1929),
-
-                // Personne seule — sous seuil : décote appliquée
-                Arguments.of(29000, "CELIBATAIRE", 0, 0, false, 1800, 873 - 0.4525 * 1800),
-
-                // Personne seule — décote supérieure à impôt : impôt net = 0
-                Arguments.of(20000, "CELIBATAIRE", 0, 0, false, 500, 0),
-
-                // Couple — sans décote
-                Arguments.of(60000, "MARIE", 0, 0, false, 4000, 4000),
-
-                // Couple — au seuil pile : 3191€ (pas de décote)
-                Arguments.of(45000, "MARIE", 0, 0, false, 3191, 3191),
-
-                // Couple — sous seuil : décote appliquée
-                Arguments.of(43000, "MARIE", 0, 0, false, 3000, 1444 - 0.4525 * 3000),
-
-                // Couple — décote supérieure à impôt : impôt net = 0
-                Arguments.of(30000, "MARIE", 0, 0, false, 500, 0)
+                Arguments.of(57880, "MARIE", 0, 0, false, 3191, 3191),
+                Arguments.of(57870, "MARIE", 0, 0, false, 3190, 3189)
         );
     }
 
@@ -247,10 +232,60 @@ public class TestsSimulateur {
         simulateur.calculImpotSurRevenuNet();
 
         // Assert
-        //assertEquals((int) impotBrutAttendu, simulateur.getImpotAvantDecote(), "Impôt brut incorrect");
-        //assertEquals((int) Math.round(impotNetAttendu), simulateur.getImpotSurRevenuNet(), "Impôt net incorrect après décote");
+        assertEquals((int) impotBrutAttendu, simulateur.getImpotAvantDecote(), "Impôt brut incorrect");
+        assertEquals((int) Math.round(impotNetAttendu), simulateur.getImpotSurRevenuNet(), "Impôt net incorrect après décote");
     }
 
+
+    /// COUVERTURE EXIGENCE : EXG_IMPOT_07 ////////////////////////////////////////////////////////////////////////
+
+    public static Stream<Arguments> donneesContributionExceptionnelle(){
+        return Stream.of(
+                // Cas droits
+                Arguments.of(240000, 0, "CELIBATAIRE", 0, 0, false, 0),
+                Arguments.of(240000, 10000, "MARIE", 0, 0, false, 0),
+                Arguments.of(550000, 0, "CELIBATAIRE", 0, 0, false, 9500),
+                Arguments.of(1100000, 0, "CELIBATAIRE", 0, 0, false, 7500 + 20000 + 4000),
+                Arguments.of(300000, 250000, "MARIE", 0, 0, false, (int)((550000 - 500000) * 0.03)),
+                Arguments.of(700000, 500000, "PACSE", 0, 0, false, 15000 + 8000),
+
+                //Cas aux limites
+
+                Arguments.of(250001, 0, "CELIBATAIRE", 0, 0, false, 1),
+                Arguments.of(499999, 0, "CELIBATAIRE", 0, 0, false, 74999),
+                Arguments.of(500000, 0, "CELIBATAIRE", 0, 0, false, 75000),
+                Arguments.of(500001, 0, "CELIBATAIRE", 0, 0, false, 75000),
+                Arguments.of(999999, 0, "CELIBATAIRE", 0, 0, false, 75000 + 199999 * 0.04),
+                Arguments.of(1000000, 0, "CELIBATAIRE", 0, 0, false, 75000 + 500000 * 0.04),
+                Arguments.of(1000001, 0, "CELIBATAIRE", 0, 0, false, 75000 + 500000 * 0.04 + 1 * 0.04),
+                Arguments.of(250000, 250000, "MARIE", 0, 0, false, 0),
+                Arguments.of(250000, 250001, "PACSE", 0, 0, false, 0),
+                Arguments.of(500000, 500001, "MARIE", 0, 0, false, (int)(500000 * 0.03 + 1 * 0.04))
+
+
+        );
+    }
+
+    /*
+    @DisplayName("EXG_IMPOT_07 - Contribution exceptionnelle sur les hauts revenus")
+    @ParameterizedTest
+    @MethodSource("donneesContributionExceptionnelle")
+    void testContributionExceptionnelle(int revenu1, int revenu2, String situation, int enfants, int enfantsHandi, boolean parentIsole, int cehrAttendue) {
+        //Arrange
+        simulateur.setRevenusNetDeclarant1(revenu1);
+        simulateur.setRevenusNetDeclarant2(revenu2);
+        simulateur.setSituationFamiliale(SituationFamiliale.valueOf(situation));
+        simulateur.setNbEnfantsACharge(enfants);
+        simulateur.setNbEnfantsSituationHandicap(enfantsHandi);
+        simulateur.setParentIsole(parentIsole);
+
+        //Act
+        simulateur.calculImpotSurRevenuNet();
+
+        //Assert
+        assertEquals(cehrAttendue, simulateur.getContribExceptionnelle(), "Erreur sur le calcul de la CEHR");
+    }
+    */
 
     /// COUVERTURE EXIGENCE : ROBUSTESSE ////////////////////////////////////////////////////////////////////////////
 
