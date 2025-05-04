@@ -6,17 +6,18 @@ Ce projet Java propose un simulateur d’impôt sur le revenu, structuré et ré
 
 ## 📁 Structure du projet
 
-com.kerware.simulateurreusine
-│
-├── CalculAbattement.java // Calcul de l’abattement fiscal
-├── CalculCEHR.java // Calcul de la contribution exceptionnelle sur les hauts revenus
-├── CalculDecote.java // Calcul de la décote
-├── CalculerImpotBrut.java // Calcul de l’impôt brut selon les tranches fiscales
-├── CalculPartFiscale.java // Calcul du nombre de parts fiscales
-├── DonneesFiscales.java // Représentation des données fiscales du foyer
-├── PlafondQuotientFamilial.java // Application du plafonnement du quotient familial
-├── SimulateurReusine.java // Orchestration des calculs et contrôles de cohérence
-└── SimulateurLauncher.java // Classe d'exécution et de test de la simulation
+com.kerware.simulateurreusine  
+│  
+├── CalculAbattement.java            // Calcul de l’abattement fiscal  
+├── CalculCEHR.java                  // Calcul de la contribution exceptionnelle sur les hauts revenus  
+├── CalculDecote.java                // Calcul de la décote  
+├── CalculerImpotBrut.java           // Calcul de l’impôt brut selon les tranches fiscales  
+├── CalculPartFiscale.java           // Calcul du nombre de parts fiscales  
+├── DonneesFiscales.java             // Représentation des données fiscales du foyer  
+├── PlafondQuotientFamilial.java     // Application du plafonnement du quotient familial  
+├── SimulateurReusine.java           // Orchestration des calculs et contrôles de cohérence  
+└── SimulateurLauncher.java          // Classe d'exécution et de test de la simulation  
+
 
 ---
 
