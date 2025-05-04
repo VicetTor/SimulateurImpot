@@ -4,15 +4,40 @@ import com.kerware.simulateur.SituationFamiliale;
 
 public final class DonneesFiscales {
     // Données fiscales : revenus, situation familiale et informations sur les enfants
-    public final int revenu1;
-    public final int revenu2;
-    public final SituationFamiliale situation;
-    public final int nbEnfants;
-    public final int nbEnfantsHandicap;
-    public final boolean parentIsole;
+    private final int revenu1;
+    private final int revenu2;
+    private final SituationFamiliale situation;
+    private final int nbEnfants;
+    private final int nbEnfantsHandicap;
+    private final boolean parentIsole;
+
+    public int getRevenu1(){
+        return revenu1;
+    }
+
+    public int getRevenu2(){
+        return revenu2;
+    }
+
+    public int getNbEnfants() {
+        return nbEnfants;
+    }
+
+    public int getNbEnfantsHandicap() {
+        return nbEnfantsHandicap;
+    }
+
+    public boolean isParentIsole() {
+        return parentIsole;
+    }
+
+    public SituationFamiliale getSituation() {
+        return situation;
+    }
 
     // Constructeur pour initialiser les données fiscales
-    public DonneesFiscales(int r1, int r2, SituationFamiliale sit, int enfants, int enfantsHandi, boolean isol) {
+    public DonneesFiscales(int r1, int r2, SituationFamiliale sit
+            , int enfants, int enfantsHandi, boolean isol) {
         this.revenu1 = r1;
         this.revenu2 = r2;
         this.situation = sit;
@@ -28,6 +53,7 @@ public final class DonneesFiscales {
 
     // Retour du nombre de déclarants : 2 si marié/pacsé, 1 sinon
     public int getNbPartsDecl() {
-        return (situation == SituationFamiliale.MARIE || situation == SituationFamiliale.PACSE) ? 2 : 1;
+        return (situation == SituationFamiliale.MARIE ||
+                situation == SituationFamiliale.PACSE) ? 2 : 1;
     }
 }

@@ -15,13 +15,17 @@ public final class CalculAbattement {
     public double calculer(DonneesFiscales donnees) {
 
         // Calcul de l'abattement pour le premier revenu
-        int abt1 = Math.min( Math.max( (int) Math.round(donnees.revenu1 * TAUX_ABATTEMENT), ABATTEMENT_MIN ), ABATTEMENT_MAX );
+        int abt1 = Math.min( Math.max( (int) Math.round(donnees.getRevenu1()
+                * TAUX_ABATTEMENT), ABATTEMENT_MIN ), ABATTEMENT_MAX );
         // Initialisation de l'abattement pour le deuxième revenu
         int abt2 = 0;
 
-        // Si situation familiale est mariée ou pacsée, calcul de l'abattement pour le deuxième revenu
-        if (donnees.situation == com.kerware.simulateur.SituationFamiliale.MARIE || donnees.situation == com.kerware.simulateur.SituationFamiliale.PACSE) {
-            abt2 = Math.min( Math.max((int) Math.round( donnees.revenu2 * TAUX_ABATTEMENT ), ABATTEMENT_MIN ), ABATTEMENT_MAX);
+        // Si situation familiale est mariée ou pacsée,
+        // calcul de l'abattement pour le deuxième revenu
+        if (donnees.getSituation() == com.kerware.simulateur.SituationFamiliale.MARIE
+                || donnees.getSituation() == com.kerware.simulateur.SituationFamiliale.PACSE) {
+            abt2 = Math.min( Math.max((int) Math.round( donnees.getRevenu2()
+                    * TAUX_ABATTEMENT ), ABATTEMENT_MIN ), ABATTEMENT_MAX);
         }
 
         // Retourner la somme des abattements

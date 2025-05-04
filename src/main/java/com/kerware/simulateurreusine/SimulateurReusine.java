@@ -7,48 +7,54 @@ public final class SimulateurReusine {
     // Stocke le montant de l'impôt avant application de la décote
     private double impotAvantDecote = 0;
 
+    private void verifierNonNegatif(String champ, int valeur) {
+        if (valeur < 0) {
+            throw new IllegalArgumentException(champ + " ne peut pas être négatif");
+        }
+    }
+
     // Méthode de vérification des données fiscales avant simulation
     public void verificationsExceptions(DonneesFiscales donnees){
         if (donnees == null) {
             throw new IllegalArgumentException("Les données fiscales ne peuvent pas être null");
         }
 
-        if (donnees.situation == null) {
+        if (donnees.getSituation() == null) {
             throw new IllegalArgumentException("La situation familiale ne peut pas être null");
         }
 
-        if (donnees.revenu1 < 0 || donnees.revenu2 < 0) {
-            throw new IllegalArgumentException("Le revenu net ne peut pas être négatif");
+        verifierNonNegatif("Le revenu 1", donnees.getRevenu1());
+        verifierNonNegatif("Le revenu 2", donnees.getRevenu2());
+        verifierNonNegatif("Le nombre d'enfants", donnees.getNbEnfants());
+        verifierNonNegatif("Le nombre d'enfants handicapés", donnees.getNbEnfantsHandicap());
+
+        if (donnees.getNbEnfantsHandicap() > donnees.getNbEnfants()) {
+            throw new IllegalArgumentException("Le " +
+                    "nombre d'enfants handicapés ne peut pas dépasser le nombre d'enfants");
         }
 
-        if (donnees.nbEnfants < 0) {
-            throw new IllegalArgumentException("Le nombre d'enfants ne peut pas être négatif");
-        }
-
-        if (donnees.nbEnfantsHandicap < 0) {
-            throw new IllegalArgumentException("Le nombre d'enfants handicapés ne peut pas être négatif");
-        }
-
-        if (donnees.nbEnfantsHandicap > donnees.nbEnfants) {
-            throw new IllegalArgumentException("Le nombre d'enfants handicapés ne peut pas dépasser le nombre d'enfants");
-        }
-
-        if (donnees.nbEnfants > 7) {
-            throw new IllegalArgumentException("Le nombre d'enfants ne peut pas dépasser 7");
+        final int maxEnfants = 7;
+        if (donnees.getNbEnfants() > maxEnfants) {
+            throw new IllegalArgumentException("Le" +
+                    " nombre d'enfants ne peut pas dépasser 7");
         }
 
         // Vérifie qu'il n'y a pas de revenu2 si le contribuable est seul
-        boolean seul = donnees.situation == SituationFamiliale.CELIBATAIRE
-                || donnees.situation == SituationFamiliale.DIVORCE
-                || donnees.situation == SituationFamiliale.VEUF;
+        boolean seul = donnees.getSituation() == SituationFamiliale.CELIBATAIRE
+                || donnees.getSituation() == SituationFamiliale.DIVORCE
+                || donnees.getSituation() == SituationFamiliale.VEUF;
 
-        if (seul && donnees.revenu2 > 0) {
-            throw new IllegalArgumentException("Le déclarant 2 ne peut pas avoir de revenu si le contribuable est seul");
+        if (seul && donnees.getRevenu2() > 0) {
+            throw new IllegalArgumentException("Le " +
+                    " déclarant 2 ne peut pas avoir de revenu si le contribuable est seul");
         }
 
         // Vérifie qu'un parent isolé n'est pas marié/pacsé
-        if (donnees.parentIsole && (donnees.situation == SituationFamiliale.MARIE || donnees.situation == SituationFamiliale.PACSE)) {
-            throw new IllegalArgumentException("Un parent isolé ne peut pas être marié ou pacsé");
+        if (donnees.isParentIsole() && (donnees.getSituation() ==
+                SituationFamiliale.MARIE ||
+                donnees.getSituation() == SituationFamiliale.PACSE)) {
+            throw new IllegalArgumentException("" +
+                    "Un parent isolé ne peut pas être marié ou pacsé");
         }
     }
 
@@ -78,7 +84,8 @@ public final class SimulateurReusine {
 
         // Application du plafonnement du quotient familial si nécessaire
         if (nbParts > nbPartsDecl) {
-            impotBrut = new PlafondQuotientFamilial().appliquer(impotBrut, impotDecl, nbParts, nbPartsDecl);
+            impotBrut = new PlafondQuotientFamilial().appliquer(impotBrut
+                    , impotDecl, nbParts, nbPartsDecl);
         }
 
         // Stockage de l'impôt avant décote pour consultation éventuelle

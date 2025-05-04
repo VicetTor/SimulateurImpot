@@ -47,7 +47,8 @@ public final class AdaptateurSimulateurReusine implements ICalculateurImpot {
 
     @Override
     public void calculImpotSurRevenuNet() {
-        this.donnees = new DonneesFiscales(revenu1, revenu2, situation, nbEnfants, nbEnfantsHandicap, parentIsole);
+        this.donnees = new DonneesFiscales(revenu1, revenu2,
+                situation, nbEnfants, nbEnfantsHandicap, parentIsole);
         this.resultat = simulateur.calculerImpot(donnees);
     }
 
@@ -63,7 +64,8 @@ public final class AdaptateurSimulateurReusine implements ICalculateurImpot {
 
     @Override
     public double getContribExceptionnelle() {
-        return new CalculCEHR().calculer(donnees.getRevenuTotal() - new CalculAbattement().calculer(donnees), donnees.getNbPartsDecl());
+        return new CalculCEHR().calculer(donnees.getRevenuTotal()
+                - new CalculAbattement().calculer(donnees), donnees.getNbPartsDecl());
     }
 
     @Override
