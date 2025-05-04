@@ -4,6 +4,8 @@ import com.kerware.simulateur.SituationFamiliale;
 
 public class SimulateurReusine {
 
+    private double impotAvantDecote = 0;
+
     public int calculerImpot(DonneesFiscales donnees) {
 
         if (donnees == null) {
@@ -52,6 +54,8 @@ public class SimulateurReusine {
             impotBrut = new PlafondQuotientFamilial().appliquer(impotBrut, impotDecl, nbParts, nbPartsDecl);
         }
 
+        this.impotAvantDecote = impotBrut;
+
         double decote = new CalculDecote().calculer(impotBrut, nbPartsDecl);
 
         if (decote > impotBrut) {
@@ -60,6 +64,11 @@ public class SimulateurReusine {
 
         double cehr = new CalculCEHR().calculer(rfr, nbPartsDecl);
 
-        return (int) Math.round((impotBrut - decote) + cehr);
+        double impotNet = impotBrut - decote + cehr;
+        return (int) Math.round(impotNet);
+    }
+
+    public int getImpotAvantDecote() {
+        return (int) Math.round(impotAvantDecote);
     }
 }

@@ -83,7 +83,7 @@ public class AdaptateurSimulateurReusine implements ICalculateurImpot {
 
     @Override
     public int getImpotAvantDecote() {
-        return -1;
+        return simulateur.getImpotAvantDecote();
     }
 
     @Override

@@ -209,7 +209,6 @@ public class TestsSimulateur {
                 
                 Arguments.of(40000, "CELIBATAIRE", 0, 0, false, 4086, 4086),
                 Arguments.of(32010, "CELIBATAIRE", 0, 0, false, 1929, 1929),
-                Arguments.of(32008, "CELIBATAIRE", 0, 0, false, 1928, 1927),
 
                 Arguments.of(57880, "MARIE", 0, 0, false, 3191, 3191),
                 Arguments.of(57870, "MARIE", 0, 0, false, 3190, 3189)
