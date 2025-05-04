@@ -9,6 +9,6 @@ public class PlafondQuotientFamilial {
         if (gain > maxGain) {
             return impotsDecl - maxGain;
         }
-        return impotsBrut;
+        return Math.round(impotsBrut);
     }
 }
