@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculAbattement.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculAbattement.java</span></div><h1>CalculAbattement.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+import com.kerware.simulateurreusine.DonneesFiscales;
+
+<span class="fc" id="L5">public final class CalculAbattement {</span>
+
+    // Taux d'abattement de 10%
+    private static final double TAUX_ABATTEMENT = 0.10;
+
+    // Limites de l'abattement (min et max)
+    private static final int ABATTEMENT_MAX = 14171;
+    private static final int ABATTEMENT_MIN = 495;
+
+    // Méthode pour calculer l'abattement total
+    public double calculer(DonneesFiscales donnees) {
+
+        // Calcul de l'abattement pour le premier revenu
+<span class="fc" id="L18">        int abt1 = Math.min( Math.max( (int) Math.round(donnees.getRevenu1()</span>
+                * TAUX_ABATTEMENT), ABATTEMENT_MIN ), ABATTEMENT_MAX );
+        // Initialisation de l'abattement pour le deuxième revenu
+<span class="fc" id="L21">        int abt2 = 0;</span>
+
+        // Si situation familiale est mariée ou pacsée,
+        // calcul de l'abattement pour le deuxième revenu
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (donnees.getSituation() == com.kerware.simulateur.SituationFamiliale.MARIE</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">                || donnees.getSituation() == com.kerware.simulateur.SituationFamiliale.PACSE) {</span>
+<span class="fc" id="L27">            abt2 = Math.min( Math.max((int) Math.round( donnees.getRevenu2()</span>
+                    * TAUX_ABATTEMENT ), ABATTEMENT_MIN ), ABATTEMENT_MAX);
+        }
+
+        // Retourner la somme des abattements
+<span class="fc" id="L32">        return abt1 + abt2;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

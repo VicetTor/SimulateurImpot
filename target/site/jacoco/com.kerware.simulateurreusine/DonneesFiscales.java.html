@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DonneesFiscales.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">DonneesFiscales.java</span></div><h1>DonneesFiscales.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+import com.kerware.simulateur.SituationFamiliale;
+
+public final class DonneesFiscales {
+    // Données fiscales : revenus, situation familiale et informations sur les enfants
+    private final int revenu1;
+    private final int revenu2;
+    private final SituationFamiliale situation;
+    private final int nbEnfants;
+    private final int nbEnfantsHandicap;
+    private final boolean parentIsole;
+
+    public int getRevenu1(){
+<span class="fc" id="L15">        return revenu1;</span>
+    }
+
+    public int getRevenu2(){
+<span class="fc" id="L19">        return revenu2;</span>
+    }
+
+    public int getNbEnfants() {
+<span class="fc" id="L23">        return nbEnfants;</span>
+    }
+
+    public int getNbEnfantsHandicap() {
+<span class="fc" id="L27">        return nbEnfantsHandicap;</span>
+    }
+
+    public boolean isParentIsole() {
+<span class="fc" id="L31">        return parentIsole;</span>
+    }
+
+    public SituationFamiliale getSituation() {
+<span class="fc" id="L35">        return situation;</span>
+    }
+
+    // Constructeur pour initialiser les données fiscales
+    public DonneesFiscales(int r1, int r2, SituationFamiliale sit
+<span class="fc" id="L40">            , int enfants, int enfantsHandi, boolean isol) {</span>
+<span class="fc" id="L41">        this.revenu1 = r1;</span>
+<span class="fc" id="L42">        this.revenu2 = r2;</span>
+<span class="fc" id="L43">        this.situation = sit;</span>
+<span class="fc" id="L44">        this.nbEnfants = enfants;</span>
+<span class="fc" id="L45">        this.nbEnfantsHandicap = enfantsHandi;</span>
+<span class="fc" id="L46">        this.parentIsole = isol;</span>
+<span class="fc" id="L47">    }</span>
+
+    // Calcul et retour du revenu total du foyer
+    public double getRevenuTotal() {
+<span class="fc" id="L51">        return revenu1 + revenu2;</span>
+    }
+
+    // Retour du nombre de déclarants : 2 si marié/pacsé, 1 sinon
+    public int getNbPartsDecl() {
+<span class="fc bfc" id="L56" title="All 4 branches covered.">        return (situation == SituationFamiliale.MARIE ||</span>
+<span class="fc" id="L57">                situation == SituationFamiliale.PACSE) ? 2 : 1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

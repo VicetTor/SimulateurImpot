@@ -1,0 +1,11 @@
+com\kerware\simulateur\ICalculateurImpot.class
+com\kerware\simulateurreusine\AdaptateurSimulateurReusine.class
+com\kerware\simulateurreusine\PlafondQuotientFamilial.class
+com\kerware\simulateurreusine\SimulateurReusine.class
+com\kerware\simulateur\SituationFamiliale.class
+com\kerware\simulateurreusine\CalculAbattement.class
+com\kerware\simulateurreusine\CalculDecote.class
+com\kerware\simulateurreusine\CalculPartFiscale.class
+com\kerware\simulateurreusine\CalculerImpotBrut.class
+com\kerware\simulateurreusine\DonneesFiscales.class
+com\kerware\simulateurreusine\CalculCEHR.class

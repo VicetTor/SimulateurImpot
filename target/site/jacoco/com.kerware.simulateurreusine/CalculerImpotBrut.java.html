@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculerImpotBrut.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculerImpotBrut.java</span></div><h1>CalculerImpotBrut.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+<span class="fc" id="L3">public final class CalculerImpotBrut {</span>
+    // Tranches de revenus pour le barème de l'impôt
+<span class="fc" id="L5">    private static final int[] TRANCHES = {0, 11294, 28797, 82341, 177106, Integer.MAX_VALUE};</span>
+
+    // Taux d'imposition associés à chaque tranche
+<span class="fc" id="L8">    private static final double[] TAUX = {0.0, 0.11, 0.30, 0.41, 0.45};</span>
+
+    // Méthode pour calculer l'impôt brut sur le revenu par part
+    public double calculer(double revenuParPart) {
+<span class="fc" id="L12">        double impots = 0;</span>
+
+        // Parcours des tranches et calcul de l'impôt tranche par tranche
+<span class="fc bfc" id="L15" title="All 2 branches covered.">        for (int i = 0; i &lt; TAUX.length; i++) {</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">            if (revenuParPart &gt; TRANCHES[i]) {</span>
+<span class="fc" id="L17">                double base = Math.min(revenuParPart, TRANCHES[i + 1]) - TRANCHES[i];</span>
+<span class="fc" id="L18">                impots += base * TAUX[i];</span>
+            }
+        }
+
+        // Retour du montant total d'impôt brut
+<span class="fc" id="L23">        return impots;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

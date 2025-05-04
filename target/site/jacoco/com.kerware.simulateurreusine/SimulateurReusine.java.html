@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimulateurReusine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">SimulateurReusine.java</span></div><h1>SimulateurReusine.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+import com.kerware.simulateur.SituationFamiliale;
+
+<span class="fc" id="L5">public final class SimulateurReusine {</span>
+
+    // Stocke le montant de l'impôt avant application de la décote
+<span class="fc" id="L8">    private double impotAvantDecote = 0;</span>
+
+    private void verifierNonNegatif(String champ, int valeur) {
+<span class="fc bfc" id="L11" title="All 2 branches covered.">        if (valeur &lt; 0) {</span>
+<span class="fc" id="L12">            throw new IllegalArgumentException(champ + &quot; ne peut pas être négatif&quot;);</span>
+        }
+<span class="fc" id="L14">    }</span>
+
+    // Méthode de vérification des données fiscales avant simulation
+    public void verificationsExceptions(DonneesFiscales donnees){
+<span class="pc bpc" id="L18" title="1 of 2 branches missed.">        if (donnees == null) {</span>
+<span class="nc" id="L19">            throw new IllegalArgumentException(&quot;Les données fiscales ne peuvent pas être null&quot;);</span>
+        }
+
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (donnees.getSituation() == null) {</span>
+<span class="fc" id="L23">            throw new IllegalArgumentException(&quot;La situation familiale ne peut pas être null&quot;);</span>
+        }
+
+<span class="fc" id="L26">        verifierNonNegatif(&quot;Le revenu 1&quot;, donnees.getRevenu1());</span>
+<span class="fc" id="L27">        verifierNonNegatif(&quot;Le revenu 2&quot;, donnees.getRevenu2());</span>
+<span class="fc" id="L28">        verifierNonNegatif(&quot;Le nombre d'enfants&quot;, donnees.getNbEnfants());</span>
+<span class="fc" id="L29">        verifierNonNegatif(&quot;Le nombre d'enfants handicapés&quot;, donnees.getNbEnfantsHandicap());</span>
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (donnees.getNbEnfantsHandicap() &gt; donnees.getNbEnfants()) {</span>
+<span class="fc" id="L32">            throw new IllegalArgumentException(&quot;Le &quot; +</span>
+                    &quot;nombre d'enfants handicapés ne peut pas dépasser le nombre d'enfants&quot;);
+        }
+
+<span class="fc" id="L36">        final int maxEnfants = 7;</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (donnees.getNbEnfants() &gt; maxEnfants) {</span>
+<span class="fc" id="L38">            throw new IllegalArgumentException(&quot;Le&quot; +</span>
+                    &quot; nombre d'enfants ne peut pas dépasser 7&quot;);
+        }
+
+        // Vérifie qu'il n'y a pas de revenu2 si le contribuable est seul
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        boolean seul = donnees.getSituation() == SituationFamiliale.CELIBATAIRE</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">                || donnees.getSituation() == SituationFamiliale.DIVORCE</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">                || donnees.getSituation() == SituationFamiliale.VEUF;</span>
+
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">        if (seul &amp;&amp; donnees.getRevenu2() &gt; 0) {</span>
+<span class="nc" id="L48">            throw new IllegalArgumentException(&quot;Le &quot; +</span>
+                    &quot; déclarant 2 ne peut pas avoir de revenu si le contribuable est seul&quot;);
+        }
+
+        // Vérifie qu'un parent isolé n'est pas marié/pacsé
+<span class="fc bfc" id="L53" title="All 4 branches covered.">        if (donnees.isParentIsole() &amp;&amp; (donnees.getSituation() ==</span>
+                SituationFamiliale.MARIE ||
+<span class="fc bfc" id="L55" title="All 2 branches covered.">                donnees.getSituation() == SituationFamiliale.PACSE)) {</span>
+<span class="fc" id="L56">            throw new IllegalArgumentException(&quot;&quot; +</span>
+                    &quot;Un parent isolé ne peut pas être marié ou pacsé&quot;);
+        }
+<span class="fc" id="L59">    }</span>
+
+    // Méthode principale de calcul de l'impôt sur le revenu
+    public int calculerImpot(DonneesFiscales donnees) {
+
+        // Vérification des données avant traitement
+<span class="fc" id="L65">        verificationsExceptions(donnees);</span>
+
+        // Calcul de l’abattement sur revenus
+<span class="fc" id="L68">        double abattement = new CalculAbattement().calculer(donnees);</span>
+
+        // Revenu fiscal de référence après abattement
+<span class="fc" id="L71">        double rfr = donnees.getRevenuTotal() - abattement;</span>
+
+        // Calcul du nombre de parts fiscales
+<span class="fc" id="L74">        double nbParts = new CalculPartFiscale().calculer(donnees);</span>
+
+        // Calcul de l'impôt brut sur le revenu par part et pour l'ensemble des parts
+<span class="fc" id="L77">        double revenuParPart  = rfr / nbParts;</span>
+<span class="fc" id="L78">        double impotBrut = new CalculerImpotBrut().calculer(revenuParPart) * nbParts;</span>
+
+        // Calcul pour le nombre de parts déclarantes (avant majoration pour enfants, etc.)
+<span class="fc" id="L81">        double nbPartsDecl = donnees.getNbPartsDecl();</span>
+<span class="fc" id="L82">        double revenuParPartDecl = rfr / nbPartsDecl;</span>
+<span class="fc" id="L83">        double impotDecl = new CalculerImpotBrut().calculer(revenuParPartDecl) * nbPartsDecl;</span>
+
+        // Application du plafonnement du quotient familial si nécessaire
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (nbParts &gt; nbPartsDecl) {</span>
+<span class="fc" id="L87">            impotBrut = new PlafondQuotientFamilial().appliquer(impotBrut</span>
+                    , impotDecl, nbParts, nbPartsDecl);
+        }
+
+        // Stockage de l'impôt avant décote pour consultation éventuelle
+<span class="fc" id="L92">        this.impotAvantDecote = impotBrut;</span>
+
+        // Calcul de la décote éventuelle
+<span class="fc" id="L95">        double decote = new CalculDecote().calculer(impotBrut, nbPartsDecl);</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (decote &gt; impotBrut) {</span>
+<span class="nc" id="L97">            decote = impotBrut;</span>
+        }
+
+        // Calcul de la Contribution Exceptionnelle sur les Hauts Revenus (CEHR)
+<span class="fc" id="L101">        double cehr = new CalculCEHR().calculer(rfr, nbPartsDecl);</span>
+
+        // Calcul de l'impôt net : impôt brut - décote + CEHR
+<span class="fc" id="L104">        double impotNet = impotBrut - decote + cehr;</span>
+
+        // Retour de l'impôt net arrondi à l'entier
+<span class="fc" id="L107">        return (int) Math.round(impotNet);</span>
+    }
+
+    // Getter pour récupérer l'impôt avant décote
+    public int getImpotAvantDecote() {
+<span class="fc" id="L112">        return (int) Math.round(impotAvantDecote);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
