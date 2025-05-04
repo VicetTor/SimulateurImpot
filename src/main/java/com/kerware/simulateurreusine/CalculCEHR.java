@@ -1,7 +1,7 @@
 package com.kerware.simulateurreusine;
 
 public final class CalculCEHR {
-    // Définition des tranches de revenus pour le calcul de la CEHR
+    // Définition des tranches de revenus pour le calcul de la CEHR (EXG_IMPOT_07)
     private static final int[] TRANCHES = {0, 250000, 500000, 1000000, Integer.MAX_VALUE};
 
     // Taux appliqués pour une personne seule
@@ -10,7 +10,8 @@ public final class CalculCEHR {
     // Taux appliqués pour un couple
     private static final double[] TAUX_COUPLE = {0.0, 0.0, 0.03, 0.04};
 
-    // Méthode pour calculer la CEHR (Contribution Exceptionnelle sur les Hauts Revenus)
+    // Méthode pour calculer la CEHR
+    // (Contribution Exceptionnelle sur les Hauts Revenus) (EXG_IMPOT_07)
     public double calculer(double rfr, double nbPartsDecl) {
         // Choix du barème selon le nombre de parts fiscales
         double[] taux = (nbPartsDecl == 1) ? TAUX_CELIB : TAUX_COUPLE;
@@ -24,7 +25,7 @@ public final class CalculCEHR {
             }
         }
 
-        // Retour du montant arrondi
+        // Retour du montant arrondi (EXG_IMPOT_01)
         return Math.round(montant);
     }
 }

@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="9.3">
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateur\AdaptateurSimulateur.java">
+<file name="C:\Users\rocki\OneDrive\Documents\SimulateurImpots\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\CalculCEHR.java">
 </file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateur\Simulateur.java">
+<file name="C:\Users\rocki\OneDrive\Documents\SimulateurImpots\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\CalculDecote.java">
 </file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\AdaptateurSimulateurReusine.java">
-</file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\CalculAbattement.java">
-</file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\CalculCEHR.java">
-</file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\CalculDecote.java">
-</file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\CalculerImpotBrut.java">
-</file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\CalculPartFiscale.java">
-</file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\DonneesFiscales.java">
-</file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\PlafondQuotientFamilial.java">
-</file>
-<file name="C:\Users\toto1\OneDrive\Bureau\IUT\QualiteDeDev\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\SimulateurReusine.java">
+<file name="C:\Users\rocki\OneDrive\Documents\SimulateurImpots\SimulateurImpot\src\main\java\com\kerware\simulateurreusine\CalculPartFiscale.java">
 </file>
 </checkstyle>

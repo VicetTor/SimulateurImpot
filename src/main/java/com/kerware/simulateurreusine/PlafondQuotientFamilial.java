@@ -18,7 +18,7 @@ public final class PlafondQuotientFamilial {
             return impotsDecl - maxGain;
         }
 
-        // Sinon, on retourne l'impôt brut arrondi
+        // Sinon, on retourne l'impôt brut arrondi (EXG_IMPOT_01)
         return Math.round(impotsBrut);
     }
 }

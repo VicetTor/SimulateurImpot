@@ -103,11 +103,11 @@ public final class SimulateurReusine {
         // Calcul de l'impôt net : impôt brut - décote + CEHR
         double impotNet = impotBrut - decote + cehr;
 
-        // Retour de l'impôt net arrondi à l'entier
+        // Retour de l'impôt net arrondi à l'entier (EXG_IMPOT_01)
         return (int) Math.round(impotNet);
     }
 
-    // Getter pour récupérer l'impôt avant décote
+    // Getter pour récupérer l'impôt avant décote (EXG_IMPOT_01)
     public int getImpotAvantDecote() {
         return (int) Math.round(impotAvantDecote);
     }

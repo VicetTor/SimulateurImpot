@@ -26,6 +26,9 @@ public class TestsSimulateur {
     }
 
     /// COUVERTURE EXIGENCE : EXG_IMPOT_01 ////////////////////////////////////////////////////////////////////////////
+    /**
+     * Les montants calculés sont arrondis à l’€ le plus proche
+     */
 
     public static Stream<Arguments> donneesArrondissementEuroProche() {
         return Stream.of(
@@ -55,7 +58,15 @@ public class TestsSimulateur {
         assertEquals( impotAttendu, simulateur.getImpotSurRevenuNet());
     }
 
+
     /// COUVERTURE EXIGENCE : EXG_IMPOT_02 ////////////////////////////////////////////////////////////////////////////
+    /**
+     * Les revenus nets déclarés bénéficient d’un abattement de 10% qui permet d’obtenir le revenu fiscal de référence
+     * L’abattement doit être calculé SEPAREMENT pour les 2 déclarants. L’abattement du foyer est calculé en faisant la
+     * somme des 2 abattements des 2 déclarants
+     * Cet abattement, par déclarant, ne peut pas être supérieur à 14171 €
+     * Cet abattement ne peut pas être inférieur à 495 €
+     */
 
     public static Stream<Arguments> donneesAbattementFoyerFiscal() {
         return Stream.of(
@@ -89,6 +100,15 @@ public class TestsSimulateur {
 
 
     /// COUVERTURE EXIGENCE : EXG_IMPOT_03 ////////////////////////////////////////////////////////////////////////////
+    /**
+     * Le nombre de parts fiscales est calculé en fonction du nombre de membres de la famille vivant dans le même foyer
+     * 1 part par déclarant
+     * 0,5 part pour les 2 premiers enfants
+     * 1 part à partir du 3ième enfant
+     * 0,5 part supplémentaire par enfant en situation de handicap
+     * 0,5 part supplémentaire si vous êtes un parent isolé
+     * Si vous êtes veuf ou veuve avec des enfants à charges vous conservez la part de votre conjoint décédé
+     */
 
     public static Stream<Arguments> donneesPartsFoyerFiscal() {
         return Stream.of(
@@ -128,6 +148,23 @@ public class TestsSimulateur {
 
 
     /// COUVERTURE EXIGENCE : EXG_IMPOT_04 ////////////////////////////////////////////////////////////////////////////
+    /**
+     * Le calcul de l’impôt se fait en divisant le revenu fiscal de référence par le nombre de parts afin d’appliquer
+     * le barème du calcul de l’impôt pour les tranches suivantes :
+     * • De 0 € à 11294 € pas d’impôt
+     * • De 11295 à 28797 11% d’impôt
+     * • De 28798 à 82341 30% d’impôt
+     * • De 82342 à 177106 41% d’impôt
+     * • Plus de 177106 45% d’impôt
+     * Ce calcul est progressif, et tout contribuable est imposé sur toutes les tranches le concernant et non pas
+     * sur la dernière tranche seule. Cela permet de rendre le montant de l’impôt continu avec le
+     * revenu fiscal de référence
+     * Si le revenu fiscal de référence pour une part est de 30000 €, le calcul de l’impôt pour une part devient :
+     * • (28797 – 11294) * 11% + (30000 – 28797) * 30%
+     * Pour obtenir l’impôt final il faut remultiplier l’impôt obtenu pour une part par le nombre de parts du foyer
+     *  fiscal.
+     * • Impôt net = impôt( revenu fiscal de référence / nb de parts ) * nb de parts
+     */
 
     public static Stream<Arguments> donneesRevenusFoyerFiscal() {
         return Stream.of(
@@ -160,7 +197,17 @@ public class TestsSimulateur {
         assertEquals(impotAttendu, simulateur.getImpotSurRevenuNet());
     }
 
-    /// COUVERTURE EXIGENCE : EXG_IMPOT_05 ////////////////////////////////////////////////////////////////////////////*
+
+    /// COUVERTURE EXIGENCE : EXG_IMPOT_05 ///////////////////////////////////////////////////////////////////////////*
+    /**
+     * Le gain d’impôt ( impôt des déclarants seuls - impôts du foyer fiscal complet ) est plafonné.
+     * Les parts supplémentaires apportées par les enfants ne peuvent faire décroitre l’impôts que les
+     * déclarants auraient dû payer seuls, de plus de 1759 € en 2024 par demi-part supplémentaires
+     * • Soit un couple ayant 3 enfants, le couple a 2 parts, les 3 enfants
+     *  apportent 0.5 + 0.5 + 1 = 2 parts
+     * • Le gain d’impôt apporté par les enfants ne pourra donc excéder 4 * 1759 € (2 parts apportés par
+     *  les enfants / 0.5 = 4) = 7036 €
+     */
 
     public static Stream<Arguments> donneesGainImpot() {
         return Stream.of(
@@ -201,7 +248,18 @@ public class TestsSimulateur {
         assertEquals(gainAttendu, gainReel);
     }
 
-    /// COUVERTURE EXIGENCE : EXG_IMPOT_06 ////////////////////////////////////////////////////////////////////////////*
+
+    /// COUVERTURE EXIGENCE : EXG_IMPOT_06 //////////////////////////////////////////////////////////////////////Z/////*
+    /**
+     * L’administration fiscale prévoit un mécanisme de décote (abattement supplémentaire) de l’impôt pour les
+     * situations modestes.
+     * Pour un couple, si le montant de l’impôt est inférieur à 3191 € la décote s’applique
+     * Pour une personne seule, si le montant de l’impôt est inférieur à 1929 € la décote s’applique
+     * La décote se calcule en 2024 de la manière suivante :
+     * • Pour un couple : 1444 € – 45,25% * Montant impôt
+     * • Pour une personne seule : 873 € – 45,25% * Montant impôt
+     * On doit donc retrancher la décote du montant de l’impôt pour obtenir l’impôt final.
+     */
 
     public static Stream<Arguments> donneesDecote() {
         return Stream.of(
@@ -239,7 +297,13 @@ public class TestsSimulateur {
 
 
     /// COUVERTURE EXIGENCE : EXG_IMPOT_07 ////////////////////////////////////////////////////////////////////////
-
+    /**
+     * En 2024 il y a une contribution exceptionnelle pour les hauts revenus qui
+     * est calculée par tranche comme pour l’impôt principal :
+     * Pour un célibataire disposant d'un revenu fiscal de référence de 550 000 €, la
+     * contribution exceptionnelle est de : [(500 000 € - 250 000 €) x 3 %] + [(550 000 € -
+     * 500 000 €) x 4 %] = 9 500 €.
+     */
     public static Stream<Arguments> donneesContributionExceptionnelle(){
         return Stream.of(
                 // Cas droits

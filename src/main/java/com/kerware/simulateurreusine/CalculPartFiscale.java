@@ -4,7 +4,9 @@ import com.kerware.simulateurreusine.DonneesFiscales;
 import com.kerware.simulateur.SituationFamiliale;
 
 public final class CalculPartFiscale {
-    // Méthode pour calculer le nombre de parts fiscales en fonction de la situation et des enfants
+
+    // Méthode pour calculer le nombre de parts fiscales en fonction de la situation et des
+    // enfants (EXG_IMPOT_03)
     public double calculer(DonneesFiscales d) {
         // Base : 2 parts si marié/pacsé, sinon 1
         double parts = (d.getSituation() == SituationFamiliale.MARIE ||

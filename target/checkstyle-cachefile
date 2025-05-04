@@ -1,15 +1,15 @@
-#Sun May 04 22:36:36 CEST 2025
-configuration*?=4739D154C89233D7F604A6132DE062CB0D70D625
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateur\\ICalculateurImpot.java=1745951027709
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateur\\AdaptateurSimulateur.java=1746390933524
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateur\\SituationFamiliale.java=1745951027709
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\PlafondQuotientFamilial.java=1746390933545
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\DonneesFiscales.java=1746390933543
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculerImpotBrut.java=1746390933542
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\SimulateurReusine.java=1746390933547
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculAbattement.java=1746390933532
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateur\\Simulateur.java=1746390933527
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculCEHR.java=1746390933535
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\AdaptateurSimulateurReusine.java=1746390933530
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculPartFiscale.java=1746390933539
-C\:\\Users\\toto1\\OneDrive\\Bureau\\IUT\\QualiteDeDev\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculDecote.java=1746390933536
+#Sun May 04 23:07:37 CEST 2025
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateur\\AdaptateurSimulateur.java=1746391319012
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateur\\ICalculateurImpot.java=1745951711991
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateur\\Simulateur.java=1746391319014
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateur\\SituationFamiliale.java=1745951711991
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\AdaptateurSimulateurReusine.java=1746391319015
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculAbattement.java=1746392248633
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculCEHR.java=1746392804525
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculDecote.java=1746392816855
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculPartFiscale.java=1746392833655
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\CalculerImpotBrut.java=1746392488828
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\DonneesFiscales.java=1746391319020
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\PlafondQuotientFamilial.java=1746392099243
+C\:\\Users\\rocki\\OneDrive\\Documents\\SimulateurImpots\\SimulateurImpot\\src\\main\\java\\com\\kerware\\simulateurreusine\\SimulateurReusine.java=1746392210961
+configuration*?=4ED53B0062907D13CF63618D687DF46E1CA2568F

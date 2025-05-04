@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculDecote.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculDecote.java</span></div><h1>CalculDecote.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
 
 <span class="fc" id="L3">public final class CalculDecote {</span>
-    // Seuils d'impôt brut en dessous desquels la décote s'applique
+    // Seuils d'impôt brut en dessous desquels la décote s'applique (EXG_IMPOT_06)
     private static final double SEUIL_SEUL = 1929;
     private static final double SEUIL_COUPLE = 3191;
 
@@ -12,22 +12,23 @@
     // Taux de réduction appliqué sur l'impôt brut
     private static final double TAUX = 0.4525;
 
-    // Méthode pour calculer la décote selon l'impôt brut et le nombre de parts fiscales
+    // Méthode pour calculer la décote selon l'impôt brut et le nombre de parts
+    // fiscales (EXG_IMPOT_05 &amp; EXG_IMPOT_06)
     public double calculer(double impotBrut, double nbPartsDecl) {
-<span class="fc" id="L17">        double decote = 0;</span>
+<span class="fc" id="L18">        double decote = 0;</span>
 
         // Application des règles selon situation : seul ou couple
-<span class="fc bfc" id="L20" title="All 4 branches covered.">        if (nbPartsDecl == 1 &amp;&amp; impotBrut &lt; SEUIL_SEUL) {</span>
-<span class="fc" id="L21">            decote = MAX_SEUL - (impotBrut * TAUX);</span>
-<span class="fc bfc" id="L22" title="All 4 branches covered.">        } else if (nbPartsDecl == 2 &amp;&amp; impotBrut &lt; SEUIL_COUPLE) {</span>
-<span class="fc" id="L23">            decote = MAX_COUPLE - (impotBrut * TAUX);</span>
+<span class="fc bfc" id="L21" title="All 4 branches covered.">        if (nbPartsDecl == 1 &amp;&amp; impotBrut &lt; SEUIL_SEUL) {</span>
+<span class="fc" id="L22">            decote = MAX_SEUL - (impotBrut * TAUX);</span>
+<span class="fc bfc" id="L23" title="All 4 branches covered.">        } else if (nbPartsDecl == 2 &amp;&amp; impotBrut &lt; SEUIL_COUPLE) {</span>
+<span class="fc" id="L24">            decote = MAX_COUPLE - (impotBrut * TAUX);</span>
         }
 
         // La décote ne peut pas dépasser l'impôt brut
-<span class="fc" id="L27">        decote = Math.min(decote, impotBrut);</span>
+<span class="fc" id="L28">        decote = Math.min(decote, impotBrut);</span>
 
-        // Retour du montant de décote arrondi
-<span class="fc" id="L30">        return Math.round(decote);</span>
+        // Retour du montant de décote arrondi (EXG_IMPOT_01)
+<span class="fc" id="L31">        return Math.round(decote);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -103,11 +103,11 @@ import com.kerware.simulateur.SituationFamiliale;
         // Calcul de l'impôt net : impôt brut - décote + CEHR
 <span class="fc" id="L104">        double impotNet = impotBrut - decote + cehr;</span>
 
-        // Retour de l'impôt net arrondi à l'entier
+        // Retour de l'impôt net arrondi à l'entier (EXG_IMPOT_01)
 <span class="fc" id="L107">        return (int) Math.round(impotNet);</span>
     }
 
-    // Getter pour récupérer l'impôt avant décote
+    // Getter pour récupérer l'impôt avant décote (EXG_IMPOT_01)
     public int getImpotAvantDecote() {
 <span class="fc" id="L112">        return (int) Math.round(impotAvantDecote);</span>
     }

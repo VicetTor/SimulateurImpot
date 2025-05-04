@@ -1,7 +1,7 @@
 package com.kerware.simulateurreusine;
 
 public final class CalculDecote {
-    // Seuils d'impôt brut en dessous desquels la décote s'applique
+    // Seuils d'impôt brut en dessous desquels la décote s'applique (EXG_IMPOT_06)
     private static final double SEUIL_SEUL = 1929;
     private static final double SEUIL_COUPLE = 3191;
 
@@ -12,7 +12,8 @@ public final class CalculDecote {
     // Taux de réduction appliqué sur l'impôt brut
     private static final double TAUX = 0.4525;
 
-    // Méthode pour calculer la décote selon l'impôt brut et le nombre de parts fiscales
+    // Méthode pour calculer la décote selon l'impôt brut et le nombre de parts
+    // fiscales (EXG_IMPOT_05 & EXG_IMPOT_06)
     public double calculer(double impotBrut, double nbPartsDecl) {
         double decote = 0;
 
@@ -26,7 +27,7 @@ public final class CalculDecote {
         // La décote ne peut pas dépasser l'impôt brut
         decote = Math.min(decote, impotBrut);
 
-        // Retour du montant de décote arrondi
+        // Retour du montant de décote arrondi (EXG_IMPOT_01)
         return Math.round(decote);
     }
 }

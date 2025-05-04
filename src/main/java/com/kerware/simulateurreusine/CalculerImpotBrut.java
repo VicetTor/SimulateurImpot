@@ -1,13 +1,13 @@
 package com.kerware.simulateurreusine;
 
 public final class CalculerImpotBrut {
-    // Tranches de revenus pour le barème de l'impôt
+    // Tranches de revenus pour le barème de l'impôt (EXG_IMPOT_04)
     private static final int[] TRANCHES = {0, 11294, 28797, 82341, 177106, Integer.MAX_VALUE};
 
-    // Taux d'imposition associés à chaque tranche
+    // Taux d'imposition associés à chaque tranche (EXG_IMPOT_04)
     private static final double[] TAUX = {0.0, 0.11, 0.30, 0.41, 0.45};
 
-    // Méthode pour calculer l'impôt brut sur le revenu par part
+    // Méthode pour calculer l'impôt brut sur le revenu par part (EXG_IMPOT_04)
     public double calculer(double revenuParPart) {
         double impots = 0;
 
