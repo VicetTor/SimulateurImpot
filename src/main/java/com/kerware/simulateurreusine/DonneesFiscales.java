@@ -3,6 +3,7 @@ package com.kerware.simulateurreusine;
 import com.kerware.simulateur.SituationFamiliale;
 
 public class DonneesFiscales {
+    // Données fiscales : revenus, situation familiale et informations sur les enfants
     public final int revenu1;
     public final int revenu2;
     public final SituationFamiliale situation;
@@ -10,6 +11,7 @@ public class DonneesFiscales {
     public final int nbEnfantsHandicap;
     public final boolean parentIsole;
 
+    // Constructeur pour initialiser les données fiscales
     public DonneesFiscales(int r1, int r2, SituationFamiliale sit, int enfants, int enfantsHandi, boolean isol) {
         this.revenu1 = r1;
         this.revenu2 = r2;
@@ -19,10 +21,12 @@ public class DonneesFiscales {
         this.parentIsole = isol;
     }
 
+    // Calcul et retour du revenu total du foyer
     public double getRevenuTotal() {
         return revenu1 + revenu2;
     }
 
+    // Retour du nombre de déclarants : 2 si marié/pacsé, 1 sinon
     public int getNbPartsDecl() {
         return (situation == SituationFamiliale.MARIE || situation == SituationFamiliale.PACSE) ? 2 : 1;
     }
