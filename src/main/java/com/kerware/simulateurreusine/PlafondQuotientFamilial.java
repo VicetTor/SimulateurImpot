@@ -1,6 +1,6 @@
 package com.kerware.simulateurreusine;
 
-public class PlafondQuotientFamilial {
+public final class PlafondQuotientFamilial {
     // Plafond de réduction d'impôt pour une demi-part fiscale
     private static final double PLAFOND_DEMI_PART = 1759.0;
 

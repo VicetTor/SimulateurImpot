@@ -1,6 +1,6 @@
 package com.kerware.simulateurreusine;
 
-public class CalculerImpotBrut {
+public final class CalculerImpotBrut {
     // Tranches de revenus pour le barème de l'impôt
     private static final int[] TRANCHES = {0, 11294, 28797, 82341, 177106, Integer.MAX_VALUE};
 

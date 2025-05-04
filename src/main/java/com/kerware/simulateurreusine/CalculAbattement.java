@@ -2,7 +2,7 @@ package com.kerware.simulateurreusine;
 
 import com.kerware.simulateurreusine.DonneesFiscales;
 
-public class CalculAbattement {
+public final class CalculAbattement {
 
     // Taux d'abattement de 10%
     private static final double TAUX_ABATTEMENT = 0.10;

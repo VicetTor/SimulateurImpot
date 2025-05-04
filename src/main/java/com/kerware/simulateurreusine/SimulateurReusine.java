@@ -2,7 +2,7 @@ package com.kerware.simulateurreusine;
 
 import com.kerware.simulateur.SituationFamiliale;
 
-public class SimulateurReusine {
+public final class SimulateurReusine {
 
     // Stocke le montant de l'impôt avant application de la décote
     private double impotAvantDecote = 0;

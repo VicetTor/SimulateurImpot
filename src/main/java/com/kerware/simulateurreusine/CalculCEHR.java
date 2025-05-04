@@ -1,6 +1,6 @@
 package com.kerware.simulateurreusine;
 
-public class CalculCEHR {
+public final class CalculCEHR {
     // Définition des tranches de revenus pour le calcul de la CEHR
     private static final int[] TRANCHES = {0, 250000, 500000, 1000000, Integer.MAX_VALUE};
 

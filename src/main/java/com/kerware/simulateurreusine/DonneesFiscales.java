@@ -2,7 +2,7 @@ package com.kerware.simulateurreusine;
 
 import com.kerware.simulateur.SituationFamiliale;
 
-public class DonneesFiscales {
+public final class DonneesFiscales {
     // Données fiscales : revenus, situation familiale et informations sur les enfants
     public final int revenu1;
     public final int revenu2;

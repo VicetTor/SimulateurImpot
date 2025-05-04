@@ -1,6 +1,6 @@
 package com.kerware.simulateurreusine;
 
-public class CalculDecote {
+public final class CalculDecote {
     // Seuils d'impôt brut en dessous desquels la décote s'applique
     private static final double SEUIL_SEUL = 1929;
     private static final double SEUIL_COUPLE = 3191;
