@@ -1,6 +1,5 @@
-package com.kerware.simulateur;
+/*package com.kerware.simulateur;
 
-/**
  *  Cette classe permet de simuler le calcul de l'impôt sur le revenu
  *  en France pour l'année 2024 sur les revenus de l'année 2023 pour
  *  des cas simples de contribuables célibataires, mariés, divorcés, veufs
@@ -19,7 +18,7 @@ package com.kerware.simulateur;
  *  Pourtant ce code fonctionne correctement
  *  Il s'agit d'un "legacy" code qui est difficile à maintenir
  *  L'auteur n'a pas fourni de tests unitaires
- **/
+ *
 
 public class Simulateur {
 
@@ -157,9 +156,9 @@ public class Simulateur {
     }
 
 
-    // Fonction de calcul de l'impôt sur le revenu net en France en 2024 sur les revenu 2023
 
-    public int calculImpot( int revNetDecl1, int revNetDecl2, SituationFamiliale sitFam, int nbEnfants, int nbEnfantsHandicapes, boolean parentIsol) {
+    public int calculImpot( int revNetDecl1, int revNetDecl2,
+     SituationFamiliale sitFam, int nbEnfants, int nbEnfantsHandicapes, boolean parentIsol) {
 
         // Préconditions
         if ( revNetDecl1  < 0 || revNetDecl2 < 0 ) {
@@ -171,28 +170,36 @@ public class Simulateur {
         }
 
         if ( nbEnfantsHandicapes < 0 ) {
-            throw new IllegalArgumentException("Le nombre d'enfants handicapés ne peut pas être négatif");
+            throw new IllegalArgumentException(
+            "Le nombre d'enfants handicapés ne peut pas être négatif");
         }
 
         if ( sitFam == null ) {
-            throw new IllegalArgumentException("La situation familiale ne peut pas être null");
+            throw new IllegalArgumentException(
+            "La situation familiale ne peut pas être null");
         }
 
         if ( nbEnfantsHandicapes > nbEnfants ) {
-            throw new IllegalArgumentException("Le nombre d'enfants handicapés ne peut pas être supérieur au nombre d'enfants");
+            throw new IllegalArgumentException(
+            "Le nombre d'enfants handicapés ne peut pas être supérieur au nombre d'enfants");
         }
 
         if ( nbEnfants > 7 ) {
-            throw new IllegalArgumentException("Le nombre d'enfants ne peut pas être supérieur à 7");
+            throw new IllegalArgumentException(
+            "Le nombre d'enfants ne peut pas être supérieur à 7");
         }
 
-        if ( parentIsol && ( sitFam == SituationFamiliale.MARIE || sitFam == SituationFamiliale.PACSE ) ) {
-            throw new IllegalArgumentException("Un parent isolé ne peut pas être marié ou pacsé");
+        if ( parentIsol && ( sitFam == SituationFamiliale.MARIE ||
+         sitFam == SituationFamiliale.PACSE ) ) {
+            throw new IllegalArgumentException("
+            Un parent isolé ne peut pas être marié ou pacsé");
         }
 
-        boolean seul = sitFam == SituationFamiliale.CELIBATAIRE || sitFam == SituationFamiliale.DIVORCE || sitFam == SituationFamiliale.VEUF;
+        boolean seul = sitFam == SituationFamiliale.CELIBATAIRE ||
+         sitFam == SituationFamiliale.DIVORCE || sitFam == SituationFamiliale.VEUF;
         if (  seul && revNetDecl2 > 0 ) {
-            throw new IllegalArgumentException("Un célibataire, un divorcé ou un veuf ne peut pas avoir de revenu pour le déclarant 2");
+            throw new IllegalArgumentException("Un
+            célibataire, un divorcé ou un veuf ne peut pas avoir de revenu pour le déclarant 2");
         }
 
         // Initialisation des variables
@@ -246,7 +253,8 @@ public class Simulateur {
         if (abt1 > lAbtMax) {
             abt1 = lAbtMax;
         }
-        if ( sitFam == SituationFamiliale.MARIE || sitFam == SituationFamiliale.PACSE ) {
+        if ( sitFam == SituationFamiliale.MARIE ||
+        sitFam == SituationFamiliale.PACSE ) {
             if (abt2 > lAbtMax) {
                 abt2 = lAbtMax;
             }
@@ -256,7 +264,8 @@ public class Simulateur {
             abt1 = lAbtMin;
         }
 
-        if ( sitFam == SituationFamiliale.MARIE || sitFam == SituationFamiliale.PACSE ) {
+        if ( sitFam == SituationFamiliale.MARIE ||
+        sitFam == SituationFamiliale.PACSE ) {
             if (abt2 < lAbtMin) {
                 abt2 = lAbtMin;
             }
@@ -330,23 +339,29 @@ public class Simulateur {
         do {
             if ( rFRef >= limitesCEHR[i] && rFRef < limitesCEHR[i+1] ) {
                 if ( nbPtsDecl == 1 ) {
-                    contribExceptionnelle += ( rFRef - limitesCEHR[i] ) * tauxCEHRCelibataire[i];
+                    contribExceptionnelle += ( rFRef - limitesCEHR[i] )
+                     * tauxCEHRCelibataire[i];
                 } else {
-                    contribExceptionnelle += ( rFRef - limitesCEHR[i] ) * tauxCEHRCouple[i];
+                    contribExceptionnelle += ( rFRef - limitesCEHR[i] )
+                    * tauxCEHRCouple[i];
                 }
                 break;
             } else {
                 if ( nbPtsDecl == 1 ) {
-                    contribExceptionnelle += ( limitesCEHR[i+1] - limitesCEHR[i] ) * tauxCEHRCelibataire[i];
+                    contribExceptionnelle += ( limitesCEHR[i+1] - limitesCEHR[i] )
+                    * tauxCEHRCelibataire[i];
                 } else {
-                    contribExceptionnelle += ( limitesCEHR[i+1] - limitesCEHR[i] ) * tauxCEHRCouple[i];
+                    contribExceptionnelle += ( limitesCEHR[i+1] - limitesCEHR[i] )
+                     * tauxCEHRCouple[i];
                 }
             }
             i++;
         } while( i < 5);
 
         contribExceptionnelle = Math.round( contribExceptionnelle );
-        System.out.println( "Contribution exceptionnelle sur les hauts revenus : " + contribExceptionnelle );
+        System.out.println( "
+        Contribution exceptionnelle sur les hauts revenus : " +
+         contribExceptionnelle );
 
         // Calcul impôt des declarants
         // EXIGENCE : EXG_IMPOT_04
@@ -410,7 +425,8 @@ public class Simulateur {
             mImp = mImpDecl - plafond;
         }
 
-        System.out.println( "Impôt brut après plafonnement avant decote : " + mImp );
+        System.out.println( "Impôt brut après plafonnement
+        avant decote : " + mImp );
         mImpAvantDecote = mImp;
 
         // Calcul de la decote
@@ -451,3 +467,4 @@ public class Simulateur {
 
 
 }
+*/

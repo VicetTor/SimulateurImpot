@@ -1,6 +1,5 @@
 package simulateur;
 
-import com.kerware.simulateur.AdaptateurSimulateur;
 import com.kerware.simulateur.ICalculateurImpot;
 import com.kerware.simulateur.SituationFamiliale;
 import com.kerware.simulateurreusine.AdaptateurSimulateurReusine;
